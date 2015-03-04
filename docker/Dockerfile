@@ -1,5 +1,5 @@
 FROM phusion/baseimage:0.9.15
-MAINTAINER Marius Sturm <hello@torch.sh>
+MAINTAINER Ronald Rink <ronald.rink@d-fens.net>
 
 ENV DEBIAN_FRONTEND noninteractive
 
