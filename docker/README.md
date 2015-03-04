@@ -1,6 +1,11 @@
 Graylog *Docker* container
 ==================================
-This project creates a Docker container with full Graylog stack installed.
+This project creates a Docker container with full Graylog stack installed. The repository is a fork of the official 
+[Graylog graylog2-images](https://github.com/Graylog2/graylog2-images) repository.
+
+Modifications
+-------------
+The only modification to the official Dockerfile was to replace the underlying JVM from version 7 to version 8.
 
 Requirements
 ------------
