@@ -41,7 +41,7 @@ to set a variable add a `-e VARIABLE_NAME` option to your `docker run` command. 
 start your container like this:
 
 ```shell
-$ docker run -t -p 9000:9000 -p 12201:12201 -e GRAYLOG_PASSWORD=SeCuRePwD graylog2/allinone
+$ docker run -t -p 9000:9000 -p 12201:12201 -e GRAYLOG_PASSWORD=SeCuRePwD dfch/graylog2-images
 ```
 
 | Variable Name | Configuration Option |
@@ -80,13 +80,13 @@ To setup two containers, one for the web interface and one for the server compon
 
 Start the `master` with Graylog server parts
 ```shell
-$ docker run -t -p 12900:12900 -p 12201:12201 -p 4001:4001 -e GRAYLOG_SERVER=true graylog2/allinone
+$ docker run -t -p 12900:12900 -p 12201:12201 -p 4001:4001 -e GRAYLOG_SERVER=true dfch/graylog2-images
 ```
 The configuration port 4001 is now accessible through the host IP address.
 
 Start the web interface in a second container and give the host address as `master` to fetch configuration options
 ```shell
-$ docker run -t -p 9000:9000 -e GRAYLOG_MASTER=<host IP address> -e GRAYLOG_WEB=true graylog2/allinone
+$ docker run -t -p 9000:9000 -e GRAYLOG_MASTER=<host IP address> -e GRAYLOG_WEB=true dfch/graylog2-images
 ```
 
 Build
