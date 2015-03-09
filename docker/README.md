@@ -12,8 +12,8 @@ Requirements
 You need a recent `docker` version installed, take a look [here](https://docs.docker.com/installation/) for instructions.
 
 ```shell
-$ docker pull graylog2/allinone
-$ docker run -t -p 9000:9000 -p 12201:12201 graylog2/allinone
+$ docker pull dfch/graylog2-images
+$ docker run -t -p 9000:9000 -p 12201:12201 dfch/graylog2-images
 ```
 
 This will create a container with all Graylog services running.
