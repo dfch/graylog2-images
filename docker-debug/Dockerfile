@@ -3,8 +3,6 @@ MAINTAINER Ronald Rink <ronald.rink@d-fens.net>
 
 ENV DEBIAN_FRONTEND noninteractive
 
-ENV JAVA_OPTIONS -Xdebug
-
 RUN apt-get update && \
     apt-get install -y wget curl ntp ntpdate tzdata && \
     curl -O -L https://packages.graylog2.org/releases/graylog2-omnibus/ubuntu/graylog_latest.deb && \
@@ -21,6 +19,9 @@ RUN cd /tmp && \
     tar -zxvf /tmp/jre-8u40-linux-x64.tar.gz && \
     ls -l /opt/graylog/embedded && mv /opt/graylog/embedded/jre1.8.0_40 /opt/graylog/embedded/jre && \
     rm -f /tmp/jre-8u40-linux-x64.tar.gz
+
+# run graylog-server with debugger
+RUN sed -i 's/\(GRAYLOG_SERVER_JAVA_OPTS=".*\)"/\1 -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005"/' /opt/graylog/embedded/cookbooks/graylog/templates/default/sv-graylog-server-run.erb
 
 VOLUME /var/opt/graylog/data
 VOLUME /var/log/graylog
@@ -39,6 +40,8 @@ EXPOSE 4001
 # syslog
 EXPOSE 514
 EXPOSE 514/udp
+# java debugger
+EXPOSE 5005
 
 CMD /opt/graylog/embedded/bin/runsvdir-docker & \
     if [ ! -z "$GRAYLOG_PASSWORD" ]; then graylog-ctl set-admin-password $GRAYLOG_PASSWORD; fi && \
