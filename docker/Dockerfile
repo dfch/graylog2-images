@@ -11,15 +11,6 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /tmp/* /var/tmp/*
 
-# replace JVM with version 8
-RUN cd /tmp && \
-    wget -q --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u40-b25/jre-8u40-linux-x64.tar.gz && \
-    cd /opt/graylog/embedded && \
-    rm -rf /opt/graylog/embedded/jre && \
-    tar -zxvf /tmp/jre-8u40-linux-x64.tar.gz && \
-    ls -l /opt/graylog/embedded && mv /opt/graylog/embedded/jre1.8.0_40 /opt/graylog/embedded/jre && \
-    rm -f /tmp/jre-8u40-linux-x64.tar.gz
-
 VOLUME /var/opt/graylog/data
 VOLUME /var/log/graylog
 VOLUME /opt/graylog/plugin
