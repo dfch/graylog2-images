@@ -5,17 +5,15 @@ This project creates a Docker container with full Graylog stack installed. The r
 
 Modifications
 -------------
-The modifications to the official Dockerfile are:
-* using Java 8 instead of Java 7
-* running graylog-server in gebugging mode (port 5005)
+The only modification to the official Dockerfile was to replace the underlying JVM from version 7 to version 8.
 
 Requirements
 ------------
 You need a recent `docker` version installed, take a look [here](https://docs.docker.com/installation/) for instructions.
 
 ```shell
-$ docker pull graylog2/allinone
-$ docker run -t -p 9000:9000 -p 12201:12201 -p 5005:5005 dfch/graylog2-images
+$ docker pull dfch/graylog2-images
+$ docker run -t -p 9000:9000 -p 12201:12201 dfch/graylog2-images
 ```
 
 This will create a container with all Graylog services running.
@@ -43,7 +41,7 @@ to set a variable add a `-e VARIABLE_NAME` option to your `docker run` command. 
 start your container like this:
 
 ```shell
-$ docker run -t -p 9000:9000 -p 12201:12201 -p 5005:5005 -e GRAYLOG_PASSWORD=SeCuRePwD dfch/graylog2-images
+$ docker run -t -p 9000:9000 -p 12201:12201 -e GRAYLOG_PASSWORD=SeCuRePwD dfch/graylog2-images
 ```
 
 | Variable Name | Configuration Option |
@@ -60,7 +58,7 @@ Persist data
 In order to persist log data and configuration settings mount the Graylog data directory outside the container:
 
 ```shell
-$ docker run -t -p 9000:9000 -p 12201:12201 -p 5005:5005 -v /graylog/data:/var/opt/graylog/data -v /graylog/logs:/var/log/graylog dfch/graylog2-images
+$ docker run -t -p 9000:9000 -p 12201:12201 -v /graylog/data:/var/opt/graylog/data -v /graylog/logs:/var/log/graylog graylog2/allinone
 ```
 
 Other volumes to persist:
@@ -82,7 +80,7 @@ To setup two containers, one for the web interface and one for the server compon
 
 Start the `master` with Graylog server parts
 ```shell
-$ docker run -t -p 12900:12900 -p 12201:12201 -p 4001:4001 -p 5005:5005 -e GRAYLOG_SERVER=true dfch/graylog2-images
+$ docker run -t -p 12900:12900 -p 12201:12201 -p 4001:4001 -e GRAYLOG_SERVER=true dfch/graylog2-images
 ```
 The configuration port 4001 is now accessible through the host IP address.
 
