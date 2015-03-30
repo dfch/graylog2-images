@@ -5,7 +5,11 @@ This project creates a Docker container with full Graylog stack installed. The r
 
 Modifications
 -------------
-The only modification to the official Dockerfile was to replace the underlying JVM from version 7 to version 8.
+The only modification is the added DEBUG support for the JVM:
+
+```
+RUN sed -i 's/\(GRAYLOG_SERVER_JAVA_OPTS=".*\)"/\1 -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005"/' /opt/graylog/embedded/cookbooks/graylog/templates/default/sv-graylog-server-run.erb
+```
 
 Requirements
 ------------

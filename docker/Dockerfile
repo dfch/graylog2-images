@@ -14,7 +14,7 @@ RUN apt-get update && \
     rm -rf /tmp/* /var/tmp/*
 
 # run graylog-server with debugger
-RUN sed -i 's/\(GRAYLOG_SERVER_JAVA_OPTS=".*\)"/\1 -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005"/' /opt/graylog/embedded/cookbooks/graylog/templates/default/sv-graylog-server-run.erb
+# RUN sed -i 's/\(GRAYLOG_SERVER_JAVA_OPTS=".*\)"/\1 -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005"/' /opt/graylog/embedded/cookbooks/graylog/templates/default/sv-graylog-server-run.erb
 
 VOLUME /var/opt/graylog/data
 VOLUME /var/log/graylog
